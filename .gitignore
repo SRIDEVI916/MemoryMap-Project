@@ -1,0 +1,21 @@
+# --- IGNORE SECRETS ---
+.env
+.DS_Store
+
+# --- IGNORE PYTHON JUNK ---
+__pycache__/
+*.pyc
+venv/
+.pytest_cache/
+
+# --- IGNORE NODE JUNK (Huge Folders) ---
+node_modules/
+dist/
+npm-debug.log
+
+# --- IGNORE LOCAL DATABASES (Optional) ---
+# We usually don't push user data to GitHub
+database.json
+users.json
+backend/database.json
+backend/users.json

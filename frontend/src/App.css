@@ -1,0 +1,173 @@
+/* App.css - Final Fixed Version */
+
+/* 1. Import Editorial Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400&display=swap');
+
+/* 2. Global Background (Applied to Body) */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  
+  /* Your Aesthetic Image shows here (Login & Dashboard) */
+  background-image: url('/bg1f.jpg');
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  
+  color: #111;
+}
+
+/* 3. The "Paper" Panels (Login & Dashboard Boxes) */
+.glass-panel {
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+  padding: 50px;
+  max-width: 450px;
+  border: 1px solid #f0f0f0;
+}
+
+/* 4. Headings */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+/* 5. Minimalist Inputs */
+input, select {
+  border: none;
+  border-bottom: 1px solid #333;
+  background: transparent;
+  width: 100%;
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  margin-bottom: 25px;
+  outline: none;
+  text-align: center;
+}
+
+/* 6. Buttons */
+button {
+  padding: 15px 30px;
+  background: #000;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+button:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --- DASHBOARD STYLES --- */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.step-box {
+  background: #fff;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
+  width: 500px;
+  border-radius: 2px;
+}
+
+/* --- EDITOR STYLES (Solid White Overlay) --- */
+
+.editor-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw; 
+  
+  /* Force Solid White Background */
+  background-color: #ffffff; 
+  
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 100; 
+}
+
+/* Sidebar (With SCROLL Fix) */
+.sidebar {
+  width: 300px;
+  background: #fff;
+  border-right: 1px solid #eee;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+  /* --- THE FIX --- */
+  height: 100%;       /* Fill vertical space */
+  overflow-y: auto;   /* Scroll if too many photos */
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+/* Workspace */
+.workspace {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  
+  /* Very light grey background behind paper */
+  background-color: #f8f8f8; 
+  padding: 40px;
+}
+
+.canvas-wrapper {
+  background-color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+}
+
+/* Thumbnails */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.sidebar-thumb {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+/* Tool Buttons */
+.tool-btn {
+  background: transparent;
+  color: #111;
+  border: 1px solid #111;
+  font-size: 0.8rem;
+  padding: 8px;
+  width: 100%;
+}
