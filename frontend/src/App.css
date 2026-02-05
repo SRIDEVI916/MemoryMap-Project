@@ -171,3 +171,27 @@ button:hover {
   padding: 8px;
   width: 100%;
 }
+.loading-message {
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.sidebar-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: grab;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.sidebar-thumb:hover {
+  border-color: #6c5ce7;
+}
