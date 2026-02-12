@@ -1,47 +1,86 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import PhotoEditor from './Editor';
+import './App.css';
 
 function App() {
-  // Global State for User Authentication
-  const [auth, setAuth] = useState({
-    isAuthenticated: false,
-    user: null,
-    role: null
-  });
+  const [view, setView] = useState('login'); 
+  const [username, setUsername] = useState('');
+  
+  // 1. ADDED THIS STATE: This keeps your photos alive when switching views
+  const [photos, setPhotos] = useState({ clusters: {}, extras: [] });
 
-  // Protected Route Wrapper
-  const ProtectedRoute = ({ children }) => {
-    if (!auth.isAuthenticated) {
-      return <Navigate to="/" />;
-    }
-    return children;
-  };
+  // ========================================================================
+  // LOGIN VIEW
+  // ========================================================================
+  if (view === 'login') {
+    return (
+      <Login 
+        onLoginSuccess={(user) => {
+          setUsername(user);
+          setView('dashboard');
+        }}
+        onGoToSignup={() => setView('signup')}
+      />
+    );
+  }
 
-  return (
-    <Router>
-      <Routes>
-        {/* Login is the Default Page */}
-        <Route path="/" element={<Login setAuth={setAuth} />} />
-        
-        {/* Signup Page */}
-        <Route path="/signup" element={<Signup />} />
-        
-        {/* Dashboard (Protected!) */}
-        <Route 
-          path="/dashboard" 
-          element={
-            <ProtectedRoute>
-              {/* We pass the role to the Dashboard so it can decide what to show */}
-              <Dashboard userRole={auth.role} username={auth.user} />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
-    </Router>
-  );
+  // ========================================================================
+  // SIGNUP VIEW
+  // ========================================================================
+  if (view === 'signup') {
+    return (
+      <Signup 
+        onSignupSuccess={(user) => {
+          setUsername(user);
+          setView('dashboard');
+        }}
+        onGoToLogin={() => setView('login')}
+      />
+    );
+  }
+
+  // ========================================================================
+  // DASHBOARD VIEW
+  // ========================================================================
+  if (view === 'dashboard') {
+    return (
+      <Dashboard 
+        username={username}
+        // 2. Pass setPhotos to Dashboard so it can save the results of the upload
+        setGlobalPhotos={setPhotos} 
+        onOpenEditor={() => setView('editor')}
+        onLogout={() => {
+          setUsername('');
+          setPhotos({ clusters: {}, extras: [] }); // Clear on logout
+          setView('login');
+        }}
+      />
+    );
+  }
+
+  // ========================================================================
+  // PHOTO EDITOR VIEW
+  // ========================================================================
+  if (view === 'editor') {
+    return (
+      <PhotoEditor 
+        username={username}
+        // 3. Pass the actual photos data to the Editor
+        photos={photos} 
+        onBackToDashboard={() => setView('dashboard')}
+        onLogout={() => {
+          setUsername('');
+          setPhotos({ clusters: {}, extras: [] });
+          setView('login');
+        }}
+      />
+    );
+  }
+
+  return null;
 }
 
 export default App;
